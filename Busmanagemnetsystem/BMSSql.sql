@@ -16,14 +16,19 @@ CREATE TABLE Bus (
     ArrivalTime TIME NOT NULL,
     Date DATE
 );
+alter table bus add fare int
+UPDATE Bus SET fare = 1000 WHERE BusID = 1;
+UPDATE Bus SET fare = 2000 WHERE BusID = 2;
+UPDATE Bus SET fare = 2500 WHERE BusID = 3;
 
 INSERT INTO Bus (BusNumber, BusName, Capacity, Type, Source, Destination, Distance, DepartureTime, ArrivalTime, Date)
 VALUES 
-    ('KA0101', 'Voyager', 100, 'AC', 'Bangalore', 'Chennai', 1500, '10:00', '13:00', '2024-06-07'),
-    ('KA0202', 'Star Travels', 120, 'AC', 'Chennai', 'Bangalore', 1500, '11:00', '14:00', '2024-06-06'),
-    ('KA0303', 'BMTC', 80, 'Non-AC', 'Mumbai', 'Pune', 200, '12:00', '15:00', '2024-06-07');
+    ('KA0101', 'Voyager', 10, 'AC', 'Bangalore', 'Chennai', 1500, '10:00', '13:00', '2024-06-07'),
+    ('KA0202', 'Star Travels', 12, 'AC', 'Chennai', 'Bangalore', 1500, '11:00', '14:00', '2024-06-06'),
+    ('KA0303', 'BMTC', 8, 'Non-AC', 'Mumbai', 'Pune', 200, '12:00', '15:00', '2024-06-07');
 
 SELECT * FROM Bus;
+drop table bus
 
 -- Create and insert into Driver table
 CREATE TABLE Driver (
@@ -78,7 +83,7 @@ CREATE TABLE Ticket (
     BookingDate DATE NOT NULL,
     Fare DECIMAL(10,2) NOT NULL
 );
-
+drop table ticket
 INSERT INTO Ticket (UserID, PassengerName, SeatNumber, NumberOfSeats, BusID, BusName, BookingDate, Fare)
 VALUES 
     (1, 'Lavanya', 'A1', 2, 1, 'Voyager', '2024-06-01', 100.00),
@@ -137,7 +142,7 @@ CREATE TABLE BookingHistory (
     BookingDate DATE NOT NULL,
     Status VARCHAR(50)
 );
-
+drop table bookinghistory
 INSERT INTO BookingHistory (UserID, TicketID, BookingDate, Status)
 VALUES 
     (1, 1, '2024-06-01', 'Confirmed'),
@@ -184,59 +189,63 @@ CREATE TABLE Seat (
 -- Insert seats for BusID 1
 INSERT INTO Seat (BusID, SeatNumber, IsAvailable)
 VALUES 
-    (1, 'A1', 1),
-    (1, 'A2', 1),
-    (1, 'A3', 1),
-    (1, 'A4', 1),
-    (1, 'A5', 1),
-    (1, 'A6', 1),
-    (1, 'A7', 1),
-    (1, 'A8', 1),
-    (1, 'A9', 1),
-    (1, 'A10', 0); -- One seat already booked
+    (1, '1', 1),
+    (1, '2', 1),
+    (1, '3', 1),
+    (1, '4', 1),
+    (1, '5', 1),
+    (1, '6', 1),
+    (1, '7', 1),
+    (1, '8', 1),
+    (1, '9', 1),
+    (1, '10', 1); -- One seat already booked
 
 -- Insert seats for BusID 2
 INSERT INTO Seat (BusID, SeatNumber, IsAvailable)
 VALUES 
-    (2, 'B1', 1),
-    (2, 'B2', 1),
-    (2, 'B3', 1),
-    (2, 'B4', 1),
-    (2, 'B5', 1),
-    (2, 'B6', 1),
-    (2, 'B7', 1),
-    (2, 'B8', 1),
-    (2, 'B9', 1),
-    (2, 'B10', 1),
-    (2, 'B11', 1),
-    (2, 'B12', 0); -- One seat already booked
+    (2, '11', 1),
+    (2, '12', 1),
+    (2, '13', 1),
+    (2, '14', 1),
+    (2, '15', 1),
+    (2, '16', 1),
+    (2, '17', 1),
+    (2, '18', 1),
+    (2, '19', 1),
+    (2, '20', 1),
+    (2, '21', 1),
+    (2, '22', 1); -- One seat already booked
 
 -- Insert seats for BusID 3
 INSERT INTO Seat (BusID, SeatNumber, IsAvailable)
 VALUES 
-    (3, 'C1', 1),
-    (3, 'C2', 1),
-    (3, 'C3', 1),
-    (3, 'C4', 1),
-    (3, 'C5', 1),
-    (3, 'C6', 1),
-    (3, 'C7', 1),
-    (3, 'C8', 1); -- All seats available
+    (3, '23', 1),
+    (3, '24', 1),
+    (3, '25', 1),
+    (3, '26', 1),
+    (3, '27', 1),
+    (3, '28', 1),
+    (3, '29', 1),
+    (3, '30', 1); -- All seats available
 
--- Select all records from Seat table to verify insertion
-SELECT * FROM Seat;
-
-drop table seat
+drop table seat-- Select all records from Seat table to verify insertion
+drop table ticket
+drop table payment
 -- Select all records from each table
 SELECT * FROM Bus;
 SELECT * FROM Driver;
 SELECT * FROM Maintenance;
 SELECT * FROM [User];
 SELECT * FROM Ticket;
-SELECT * FROM Payment;
 SELECT * FROM Feedback;
 SELECT * FROM UserProfile;
 SELECT * FROM BookingHistory;
 SELECT * FROM AvailableSeats;
 SELECT * FROM Booking;
-drop table booking
+SELECT * FROM Seat;
+delete from booking where bookingId=3
+drop table availableseats
+
+truncate table bookinghistory
+truncate table ticket
+truncate table booking
